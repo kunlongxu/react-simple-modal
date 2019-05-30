@@ -1,5 +1,5 @@
-import DummyClass from '../src/react-simple-modal'
-
+import ReactSimpleModal from '../src/react-simple-modal'
+import renderer from 'react-test-renderer'
 /**
  * Dummy test
  */
@@ -8,7 +8,7 @@ describe('Dummy test', () => {
     expect(true).toBeTruthy()
   })
 
-  it('DummyClass is instantiable', () => {
-    expect(new DummyClass()).toBeInstanceOf(DummyClass)
-  })
+  // it('DummyClass is instantiable', () => {
+  //   expect(new ReactSimpleModal()).toBeInstanceOf(DummyClass)
+  // })
 })
