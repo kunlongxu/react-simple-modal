@@ -14,7 +14,7 @@
   "author": "Kunlong Tsui <272992168@qq.com>",
   "repository": {
     "type": "git",
-    "url": "https:git@github.com:bigjujube/react-simple-modal.git"
+    "url": "https://github.com/bigjujube/react-simple-modal.git"
   },
   "license": "MIT",
   "engines": {
