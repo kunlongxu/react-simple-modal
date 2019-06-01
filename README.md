@@ -1,4 +1,4 @@
-# react-simple-modal-tsr
+# react-simple-modal-ts
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Travis](https://img.shields.io/travis/bigjujube/react-simple-modal.svg)](https://travis-ci.org/bigjujube/react-simple-modal)
@@ -11,7 +11,7 @@ A simple Modal Component for react
 
 ```bash
 
-npm install
+npm install react-simple-modal-ts --save
 ```
 
 **Start coding!** `package.json` and entry files are already set up for you, so don't worry about linking to your main file, typings, etc. Just keep those files with the same name.
@@ -34,13 +34,13 @@ import something from 'react-simple-modal-ts/dist/lib/something'
 
 ### NPM scripts
 
-- `npm t`: Run test suite
-- `npm start`: Run `npm run build` in watch mode
-- `npm run test:watch`: Run test suite in [interactive watch mode](http://facebook.github.io/jest/docs/cli.html#watch)
-- `npm run test:prod`: Run linting and generate coverage
-- `npm run build`: Generate bundles and typings, create docs
-- `npm run lint`: Lints code
-- `npm run commit`: Commit using conventional commit style ([husky](https://github.com/typicode/husky) will tell you to use it if you haven't :wink:)
+-   `npm t`: Run test suite
+-   `npm start`: Run `npm run build` in watch mode
+-   `npm run test:watch`: Run test suite in [interactive watch mode](http://facebook.github.io/jest/docs/cli.html#watch)
+-   `npm run test:prod`: Run linting and generate coverage
+-   `npm run build`: Generate bundles and typings, create docs
+-   `npm run lint`: Lints code
+-   `npm run commit`: Commit using conventional commit style ([husky](https://github.com/typicode/husky) will tell you to use it if you haven't :wink:)
 
 #### Setup steps
 
