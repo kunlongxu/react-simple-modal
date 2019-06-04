@@ -1,119 +1,135 @@
-import React from 'react'
-import './Modal.css'
-import ModalPortal from './ModalPortal'
-import * as CSS from 'csstype'
-const enterClasses = 'modal-enter'
-const enterActiveClasses = 'modal-enter-active'
-const enterEndActiveClasses = 'modal-enter-end'
-const leaveClasses = 'modal-leave'
-const leaveActiveClasses = 'modal-leave-active'
-const leaveEndActiveClasses = 'modal-leave-end'
+import React from "react";
+import "./Modal.css";
+import ModalPortal from "./ModalPortal";
+import * as CSS from "csstype";
+const enterClasses = "modal-enter";
+const enterActiveClasses = "modal-enter-active";
+const enterEndActiveClasses = "modal-enter-end";
+const leaveClasses = "modal-leave";
+const leaveActiveClasses = "modal-leave-active";
+const leaveEndActiveClasses = "modal-leave-end";
 // const maskActiveClasses = 'mask-active'
-const enterTimeout = 0
-const enterActiveTimeout = 200
-const enterEndActiveTimeout = 100
-const leaveTimout = 0
-const leaveActiveTimeout = 200
-const leaveEndActiveTimeout = 100
+const enterTimeout = 0;
+const enterActiveTimeout = 200;
+const enterEndActiveTimeout = 100;
+const leaveTimout = 0;
+const leaveActiveTimeout = 200;
+const leaveEndActiveTimeout = 100;
 
 interface Props {
-    visible: boolean
-    title: string
-    content: string | React.ReactNode
-    confirmBtnText: string
-    cancelBtnText: string
-    bare: boolean
-    onClose: () => void
-    onConfirm: () => void
-    contentStyle: CSS.Properties
+    visible: boolean;
+    title: string;
+    content: string | React.ReactNode;
+    confirmBtnText: string;
+    cancelBtnText: string;
+    bare: boolean;
+    onClose: () => void;
+    onConfirm: () => void;
+    contentStyle: CSS.Properties;
+    duration: number;
+    readonly: boolean;
 }
 type State = {
-    classes: string
-    visible: boolean
-    maskClasses: string
-}
+    classes: string;
+    visible: boolean;
+    maskClasses: string;
+};
 
 class Modal extends React.Component<Props, State> {
-    node: HTMLElement | null = null
+    node: HTMLElement | null = null;
     static defaultProps = {
         visable: false,
-        title: '提示',
-        content: '文本提示',
-        confirmBtnText: '确认',
-        cancelBtnText: '取消',
+        title: "提示",
+        content: "文本提示",
+        confirmBtnText: "确认",
+        cancelBtnText: "取消",
         bare: false,
         onConfirm: () => true,
-        contentStyle: {}
-    }
+        contentStyle: {},
+        duration: null,
+        readonly: false
+    };
     componentDidMount() {
         this.setState({
             visible: this.props.visible
-        })
+        });
     }
     componentWillReceiveProps(nextProps: Props) {
         if (nextProps.visible) {
-            this.enterAnimate()
+            this.enterAnimate();
         }
     }
     state = {
         visible: false,
-        classes: '',
-        maskClasses: ''
-    }
+        classes: "",
+        maskClasses: ""
+    };
 
     closeModal = () => {
-        const { onClose } = this.props
-        onClose && onClose()
-        this.leaveAnimate()
-    }
+        const { onClose, readonly } = this.props;
+        onClose && onClose();
+        if (readonly) return;
+        this.leaveAnimate();
+    };
     enterAnimate = () => {
-        this.setState({ visible: true, classes: enterClasses })
+        this.setState({ visible: true, classes: enterClasses });
 
         const enterActiveTimer = setTimeout(() => {
-            this.setState({ classes: enterActiveClasses })
-            clearTimeout(enterActiveTimer)
-        }, enterTimeout)
+            this.setState({ classes: enterActiveClasses });
+            clearTimeout(enterActiveTimer);
+        }, enterTimeout);
 
         const enterEndTimer = setTimeout(() => {
-            this.setState({ classes: enterEndActiveClasses })
-            clearTimeout(enterEndTimer)
-        }, enterEndActiveTimeout + enterActiveTimeout)
+            this.setState({ classes: enterEndActiveClasses });
+            clearTimeout(enterEndTimer);
+        }, enterEndActiveTimeout + enterActiveTimeout);
         const resetTimer = setTimeout(() => {
-            this.setState({ classes: '' })
-            clearTimeout(resetTimer)
-        }, enterTimeout + enterActiveTimeout + enterEndActiveTimeout)
-    }
+            this.setState({ classes: "" });
+            clearTimeout(resetTimer);
+        }, enterTimeout + enterActiveTimeout + enterEndActiveTimeout);
+    };
     leaveAnimate = () => {
-        this.setState({ classes: leaveClasses })
+        this.setState({ classes: leaveClasses });
         const leaveActiveTimer = setTimeout(() => {
-            this.setState({ classes: leaveActiveClasses })
-            clearTimeout(leaveActiveTimer)
-        }, leaveTimout)
+            this.setState({ classes: leaveActiveClasses });
+            clearTimeout(leaveActiveTimer);
+        }, leaveTimout);
         const leaveEndTimer = setTimeout(() => {
-            this.setState({ classes: leaveEndActiveClasses })
-            clearTimeout(leaveEndTimer)
-        }, leaveEndActiveTimeout + leaveActiveTimeout)
+            this.setState({ classes: leaveEndActiveClasses });
+            clearTimeout(leaveEndTimer);
+        }, leaveEndActiveTimeout + leaveActiveTimeout);
         const resetTimer = setTimeout(() => {
-            this.setState({ classes: '', visible: false, maskClasses: '' })
-            clearTimeout(resetTimer)
-        }, leaveTimout + leaveActiveTimeout + leaveEndActiveTimeout)
-    }
+            this.setState({ classes: "", visible: false, maskClasses: "" });
+            clearTimeout(resetTimer);
+        }, leaveTimout + leaveActiveTimeout + leaveEndActiveTimeout);
+    };
     confirm = () => {
-        const { onConfirm, onClose } = this.props
-        onConfirm && onConfirm()
-        onClose && onClose()
-        this.leaveAnimate()
-    }
+        const { onConfirm, onClose } = this.props;
+        onConfirm && onConfirm();
+        onClose && onClose();
+        this.leaveAnimate();
+    };
     closeMask = () => {
-        const { onClose } = this.props
-        onClose && onClose()
-        this.leaveAnimate()
-    }
+        const { onClose, readonly } = this.props;
+        if (readonly) return;
+        onClose && onClose();
+        this.leaveAnimate();
+    };
     render() {
-        const { visible, classes, maskClasses } = this.state
-        const { title, content, bare, cancelBtnText, confirmBtnText, onClose, onConfirm, contentStyle } = this.props
+        const { visible, classes, maskClasses } = this.state;
+        const {
+            title,
+            content,
+            bare,
+            cancelBtnText,
+            confirmBtnText,
+            onClose,
+            onConfirm,
+            contentStyle,
+            duration
+        } = this.props;
         return (
-            <ModalPortal visible={visible}>
+            <ModalPortal visible={visible} duration={duration}>
                 <div className="modal-wrapper">
                     <div className="modal-layout">
                         <div className={`modal ${classes}`}>
@@ -135,18 +151,18 @@ class Modal extends React.Component<Props, State> {
                     <div className={`mask`} onClick={this.closeMask} />
                 </div>
             </ModalPortal>
-        )
+        );
     }
 }
 interface ModalActionProps {
-    cancelAction: () => void
-    confirmAction: () => void
-    cancelText: string
-    confirmText: string
+    cancelAction: () => void;
+    confirmAction: () => void;
+    cancelText: string;
+    confirmText: string;
 }
 
 function ModalAction(props: ModalActionProps) {
-    const { cancelAction, confirmAction } = props
+    const { cancelAction, confirmAction } = props;
     return (
         <>
             <div className="modal-operator">
@@ -158,6 +174,6 @@ function ModalAction(props: ModalActionProps) {
                 </button>
             </div>
         </>
-    )
+    );
 }
-export default Modal
+export default Modal;

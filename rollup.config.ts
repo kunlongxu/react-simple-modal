@@ -13,8 +13,22 @@ const libraryName = 'react-simple-modal'
 export default {
   input: `src/${libraryName}.ts`,
   output: [
-    { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true, exports: 'named', },
-    { file: pkg.module, format: 'es', sourcemap: true, exports: 'named' },
+    {
+      file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true, exports: 'named', output: {
+        globals: {
+          'react': 'React',
+          'react-dom': 'ReactDOM',
+        }
+      }
+    },
+    {
+      file: pkg.module, format: 'es', sourcemap: true, exports: 'named', output: {
+        globals: {
+          'react': 'React',
+          'react-dom': 'ReactDOM',
+        }
+      }
+    },
   ],
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
 
