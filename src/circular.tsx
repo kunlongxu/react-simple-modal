@@ -6,7 +6,7 @@ interface MessageOption {
     duration: number;
     onClose: () => void;
 }
-function message(option: MessageOption = { content: "未定义", duration: 1400, onClose: () => true }) {
+function circular(option: MessageOption = { content: "未定义", duration: 1400, onClose: () => true }) {
     const { content, duration, onClose } = option;
     const tmpDivContainer = document.createElement("div");
     ReactDOM.render(
@@ -22,4 +22,4 @@ function message(option: MessageOption = { content: "未定义", duration: 1400,
     );
 }
 
-export default message;
+export default circular;
